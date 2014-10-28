@@ -1,7 +1,7 @@
 Christmas List Analytics
 ================
 
-Analyzing MLN's Christmas List! Uses the Facebook API and nvd3 to pull and display data. 
+Analyzing MLN's Christmas countdown song list! Uses the Facebook API and nvd3 to pull and display like and comment data surrounding each song. 
 
 Live Demo: to come
 
