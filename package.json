@@ -1,0 +1,15 @@
+{
+  "name": "scrumptious",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "express": "3.1.0",
+    "ejs": "*",
+    "step": "0.0.5",
+    "request": "2.9.x",
+    "crypto": "0.0.3"
+  }
+}

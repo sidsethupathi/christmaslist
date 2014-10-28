@@ -1,0 +1,122 @@
+<html>
+
+<head>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="js/nv.d3.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/nv.d3.css">
+<style>
+
+#chart {
+  height: 700px;
+}
+
+</style>
+</head>
+
+<body>
+<svg id="chart">
+</svg>
+
+<script type="text/javascript">
+
+
+$.get("http://localhost:3000/api/christmas", function(data_in) {
+  console.log(data_in);
+  var data = [
+  {
+    "key": "Likes",
+    "color": "#aa0114",
+    "values": [ 
+    ]
+  },
+  {
+    "key": "Comments",
+    "color": "#3C8D0D",
+    "values": [
+    ]
+  }
+];
+
+var comment_data = [
+  {
+    "key": "Likes",
+    "color": "#aa0114",
+    "values": [ 
+    ]
+  }
+];
+  
+  posts = data_in.posts;
+  people = data_in.people;
+
+  for(var d = posts.length - 1; d >= 0; --d) {
+    var post = posts[d];
+    console.log(post.name);
+    
+    data[0].values.push({
+      label: post.name,
+      value: post.likes
+    });
+    data[1].values.push({
+      label: post.name,
+      value: post.comments
+    });
+  
+  }
+
+  likes = people.likes;
+  for(var l = likes.length - 1; l >= 0; --l) {
+    like = likes[l];
+    if(like.count > 1) {
+      comment_data[0].values.push({
+        label: like.name,
+        value: like.count
+      });
+    }
+  }
+
+  nv.addGraph(function() {
+
+  var chart = nv.models.multiBarChart()
+        .x(function(d) {return d.label})
+        .y(function(d) {return d.value})
+        .margin({top: 30, right: 20, bottom: 300, left: 175})
+        .reduceXTicks(false);
+  
+  chart.xAxis
+      .rotateLabels(-52);
+
+  chart.yAxis
+        .tickFormat(d3.format('d'));
+
+  var comment_chart = nv.models.multiBarChart()
+        .x(function(d) {return d.label})
+        .y(function(d) {return d.value})
+        .margin({top: 30, right: 20, bottom: 300, left: 175})
+        .reduceXTicks(false);
+        
+  comment_chart.xAxis
+      .rotateLabels(-52);
+
+  comment_chart.yAxis
+        .tickFormat(d3.format('d'));
+
+    d3.select('#chart')
+        .datum(data)
+        .transition().duration(500)
+        .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+
+  });
+});
+
+
+</script>
+
+</body>
+
+</html>
