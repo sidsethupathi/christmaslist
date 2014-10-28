@@ -54,6 +54,7 @@ exports.christmas = function(req, res) {
                     likes: likes_count,
                     comments: comments_count
                 });
+                console.log(match[2] + ' - ' + match[3]);
             }
         }
 

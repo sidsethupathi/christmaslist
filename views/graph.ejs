@@ -40,7 +40,7 @@ $.get("http://localhost:3000/api/christmas", function(data_in) {
 
 var comment_data = [
   {
-    "key": "Likes",
+    "key": "Comments",
     "color": "#aa0114",
     "values": [ 
     ]
@@ -65,7 +65,8 @@ var comment_data = [
   
   }
 
-  likes = people.likes;
+  // fix. quick hack for mike
+  likes = people.comments;
   for(var l = likes.length - 1; l >= 0; --l) {
     like = likes[l];
     if(like.count > 1) {
